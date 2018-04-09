@@ -19,7 +19,7 @@
 #include "mgos.h"
 #include "mgos_i2c.h"
 
-#define MGOS_SHT31_READ_DELAY (2)
+#define MGOS_SHT31_READ_DELAY    (2)
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,15 +27,15 @@ extern "C" {
 
 struct mgos_sht31;
 struct mgos_sht31_stats {
-  double last_read_time;         // value of mg_time() upon last call to _read()
+  double   last_read_time;       // value of mg_time() upon last call to _read()
   uint32_t read;                 // calls to _read()
   uint32_t read_success;         // successful _read()
   uint32_t read_success_cached;  // calls to _read() which were cached
   // Note: read_errors := read - read_success - read_success_cached
-  double read_success_usecs;     // time spent in successful uncached _read()
+  double   read_success_usecs;   // time spent in successful uncached _read()
 };
 
-/* 
+/*
  * Initialize a SHT31 on the I2C bus `i2c` at address specified in `i2caddr`
  * parameter (default SHT31 is on address 0x44). The sensor will be polled for
  * validity, upon success a new `struct mgos_sht31` is allocated and
@@ -43,7 +43,7 @@ struct mgos_sht31_stats {
  */
 struct mgos_sht31 *mgos_sht31_create(struct mgos_i2c *i2c, uint8_t i2caddr);
 
-/* 
+/*
  * Destroy the data structure associated with a SHT31 device. The reference
  * to the pointer of the `struct mgos_sht31` has to be provided, and upon
  * successful destruction, its associated memory will be freed and the pointer
@@ -51,7 +51,7 @@ struct mgos_sht31 *mgos_sht31_create(struct mgos_i2c *i2c, uint8_t i2caddr);
  */
 void mgos_sht31_destroy(struct mgos_sht31 **sensor);
 
-/* 
+/*
  * The sensor will be polled for its temperature and humidity data. If the poll
  * has occured in the last `MGOS_SHT31_READ_DELAY` seconds, the cached data is
  * used (so as not to repeatedly poll the bus upon subsequent calls).
