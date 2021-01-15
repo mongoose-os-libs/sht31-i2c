@@ -53,7 +53,7 @@ enum mgos_app_init_result mgos_app_init(void) {
   if (!i2c) {
     LOG(LL_ERROR, ("I2C bus missing, set i2c.enable=true in mos.yml"));
   } else {
-    s_sht31=mgos_sht31_create(i2c, 0x40); // Default I2C address
+    s_sht31=mgos_sht31_create(i2c, 0x44); // Default I2C address
     if (s_sht31) {
       mgos_set_timer(5000, true, timer_cb, NULL);
     } else {
