@@ -93,11 +93,14 @@ struct mgos_sht31 *mgos_sht31_create(struct mgos_i2c *i2c, uint8_t i2caddr) {
   sensor->i2c     = i2c;
 
   mgos_sht31_cmd(sensor, MGOS_SHT31_SOFTRESET);
-
+  mgos_usleep(2000);
   // Toggle heater on and off, which shows up in status register bit 13 (0=Off, 1=On)
   status0 = mgos_sht31_status(sensor); // heater is off, bit13 is 0
+  mgos_usleep(2000);
   mgos_sht31_cmd(sensor, MGOS_SHT31_HEATEREN);
+  mgos_usleep(2000);
   status1 = mgos_sht31_status(sensor); // heater is on, bit13 is 1
+  mgos_usleep(2000);
   mgos_sht31_cmd(sensor, MGOS_SHT31_HEATERDIS);
   status2 = mgos_sht31_status(sensor); // heater is off, bit13 is 0
 
