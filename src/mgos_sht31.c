@@ -133,7 +133,8 @@ bool mgos_sht31_read(struct mgos_sht31 *sensor) {
 
   sensor->stats.read++;
 
-  if (start - sensor->stats.last_read_time < MGOS_SHT31_READ_DELAY) {
+  if (sensor->stats.read_success > 0 &&
+      start - sensor->stats.last_read_time < MGOS_SHT31_READ_DELAY) {
     sensor->stats.read_success_cached++;
     return true;
   }
